@@ -213,7 +213,14 @@ const DATA = [
 
 const App: () => React$Node = () => {
   const renderItem = ({item, index, separators}) => {
-    return <HackNewOverView title={item.title} />;
+    return (
+      <HackNewOverView
+        title={item.title}
+        author={item.author}
+        points={item.points}
+        numerOfComments={item.num_comments}
+      />
+    );
   };
 
   const [news, setNews] = useState([]);

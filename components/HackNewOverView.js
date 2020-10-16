@@ -11,11 +11,11 @@ const HackNewOverView = (props) => {
       <View style={styles.iconsContainer}>
         <View style={styles.icon}>
           <Icon style={styles.iconf} name="heart-outline" size={20} />
-          <Text style={styles.iconText}>266</Text>
+          <Text style={styles.iconText}>{props.points}</Text>
         </View>
         <View style={styles.icon}>
           <Icon style={styles.iconf} name="person-outline" size={20} />
-          <Text style={styles.iconText}>Piler</Text>
+          <Text style={styles.iconText}>{props.author}</Text>
         </View>
         <View style={styles.icon}>
           <Icon
@@ -23,7 +23,7 @@ const HackNewOverView = (props) => {
             name="chatbubble-ellipses-outline"
             size={20}
           />
-          <Text style={styles.iconText}>124</Text>
+          <Text style={styles.iconText}>{props.numerOfComments}</Text>
         </View>
       </View>
     </View>
