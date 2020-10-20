@@ -1,13 +1,18 @@
 import React from 'react';
-import {View, StyleSheet, TouchableWithoutFeedback, Text} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const HackNewOverView = (props) => {
   return (
     <View style={styles.newsContainer}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>{props.title ? props.title : '--'}</Text>
-      </View>
+      <TouchableOpacity
+        onPress={() => {
+          console.log('clicked!!!');
+        }}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>{props.title ? props.title : '--'}</Text>
+        </View>
+      </TouchableOpacity>
       <View style={styles.iconsContainer}>
         <View style={styles.icon}>
           <Icon style={styles.iconf} name="heart-outline" size={20} />
