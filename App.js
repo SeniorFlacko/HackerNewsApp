@@ -11,7 +11,13 @@ const App: () => React$Node = () => {
   return (
     <>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: '#ff6600',
+            },
+            headerTintColor: 'white',
+          }}>
           <Stack.Screen
             name="Home"
             component={HomeScreen}
