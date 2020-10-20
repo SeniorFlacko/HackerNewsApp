@@ -10,6 +10,10 @@ const HackNewOverView = (props) => {
           const newDetail = {
             objectID: props.objectID,
             url: props.url,
+            title: props.title,
+            author: props.author,
+            points: props.points,
+            numerOfComments: props.numerOfComments,
           };
           props.navigation.navigate('NewDetails', newDetail);
         }}>
