@@ -35,17 +35,6 @@ const Home = (props) => {
       .finally(() => setLoading(false));
   }, []);
 
-  const renderItem = ({item, index, separators}) => {
-    return (
-      <HackNewOverView
-        title={item.title}
-        author={item.author}
-        points={item.points}
-        numerOfComments={item.num_comments}
-      />
-    );
-  };
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={{flex: 1}}>
@@ -56,7 +45,16 @@ const Home = (props) => {
             ItemSeparatorComponent={Separator}
             data={news}
             keyExtractor={(item) => item.objectID.toString()}
-            renderItem={renderItem}
+            renderItem={({item, index, separators}) => (
+              <HackNewOverView
+                title={item.title}
+                author={item.author}
+                points={item.points}
+                objectID={item.objectID}
+                navigation={props.navigation}
+                numerOfComments={item.num_comments}
+              />
+            )}
           />
         )}
       </View>

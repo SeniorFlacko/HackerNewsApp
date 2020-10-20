@@ -1,7 +1,12 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
 const NewDetails = (props) => {
-  return <View>New Details works!</View>;
+  return (
+    <View>
+      <Text>Object Id</Text>
+      <Text>{props.route.params.objectID}</Text>
+    </View>
+  );
 };
 const styles = StyleSheet.create({});
 export default NewDetails;

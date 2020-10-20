@@ -7,7 +7,10 @@ const HackNewOverView = (props) => {
     <View style={styles.newsContainer}>
       <TouchableOpacity
         onPress={() => {
-          console.log('clicked!!!');
+          const newDetail = {
+            objectID: props.objectID,
+          };
+          props.navigation.navigate('NewDetails', newDetail);
         }}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{props.title ? props.title : '--'}</Text>
