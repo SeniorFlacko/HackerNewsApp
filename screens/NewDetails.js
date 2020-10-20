@@ -5,6 +5,7 @@ const NewDetails = (props) => {
     <View>
       <Text>Object Id</Text>
       <Text>{props.route.params.objectID}</Text>
+      <Text>{props.route.params.url}</Text>
     </View>
   );
 };

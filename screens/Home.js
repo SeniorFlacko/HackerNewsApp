@@ -51,6 +51,7 @@ const Home = (props) => {
                 author={item.author}
                 points={item.points}
                 objectID={item.objectID}
+                url={item.url}
                 navigation={props.navigation}
                 numerOfComments={item.num_comments}
               />

@@ -9,6 +9,7 @@ const HackNewOverView = (props) => {
         onPress={() => {
           const newDetail = {
             objectID: props.objectID,
+            url: props.url,
           };
           props.navigation.navigate('NewDetails', newDetail);
         }}>

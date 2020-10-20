@@ -2,9 +2,10 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import HomeScreen from './screens/Home';
 import NewDetails from './screens/NewDetails';
+import OpenUrlButton from './components/OpenUrlButton';
 
 const Stack = createStackNavigator();
 
@@ -30,9 +31,15 @@ const App: () => React$Node = () => {
           <Stack.Screen
             name="NewDetails"
             component={NewDetails}
-            options={{
+            options={(navigation) => ({
               title: '',
-            }}
+              headerRight: () => (
+                <OpenUrlButton
+                  style={styles.urlButton}
+                  url={navigation.route.params.url}
+                />
+              ),
+            })}
           />
         </Stack.Navigator>
       </NavigationContainer>
@@ -40,6 +47,11 @@ const App: () => React$Node = () => {
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  urlButton: {
+    color: 'white',
+    marginHorizontal: 15,
+  },
+});
 
 export default App;
