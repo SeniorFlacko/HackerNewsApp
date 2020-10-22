@@ -7,7 +7,7 @@ const NewDetails = (props) => {
   const {title, author, points, numerOfComments, objectID} = props.route.params;
   console.log(objectID);
   return (
-    <ScrollView style={styles.newsContainer}>
+    <View style={{flex: 1, flexDirection: 'column', backgroundColor: 'white'}}>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>{title ? title : '--'}</Text>
       </View>
@@ -31,9 +31,8 @@ const NewDetails = (props) => {
           </Text>
         </View>
       </View>
-
       <Comments objectID={objectID} />
-    </ScrollView>
+    </View>
   );
 };
 const styles = StyleSheet.create({

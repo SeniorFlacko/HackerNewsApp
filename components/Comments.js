@@ -9,8 +9,10 @@ import {
   FlatList,
   ActivityIndicator,
   TouchableHighlight,
+  Dimensions,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import HTML from 'react-native-render-html';
 
 const Comments = (props) => {
   const [isLoading, setLoading] = useState(true);
@@ -25,38 +27,54 @@ const Comments = (props) => {
   }, []);
 
   return (
-    <View style={{flex: 1}}>
+    <>
       {isLoading ? (
-        <ActivityIndicator />
+        <View style={[styles.container, styles.horizontal]}>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
       ) : (
-        <ScrollView>
+        <View style={{flex: 1, flexDirection: 'column'}}>
           <Text style={styles.commentsTitle}>Comments</Text>
-          {comments
-            .filter((comment) => comment.text)
-            .map((comment) => {
-              return (
-                <View key={comment.id}>
-                  <View style={styles.authorContainer}>
-                    <Text style={styles.authorText}>{comment.author}</Text>
-                    <Icon
-                      style={styles.chevron}
-                      name="chevron-down-outline"
-                      size={15}
-                    />
+          <ScrollView style={{flex: 1}}>
+            {comments
+              .filter((comment) => comment.text)
+              .map((comment) => {
+                return (
+                  <View key={comment.id} style={styles.commentSection}>
+                    <View style={styles.authorContainer}>
+                      <Text style={styles.authorText}>{comment.author}</Text>
+                      <Icon
+                        style={styles.chevron}
+                        name="chevron-down-outline"
+                        size={15}
+                      />
+                    </View>
+                    <HTML html={comment.text} />
                   </View>
-                  <Text style={styles.commentText}>{comment.text}</Text>
-                </View>
-              );
-            })}
-        </ScrollView>
+                );
+              })}
+          </ScrollView>
+        </View>
       )}
-    </View>
+    </>
   );
 };
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10,
+  },
   authorContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  commentSection: {
+    marginHorizontal: 5,
   },
   chevron: {},
   authorText: {},
