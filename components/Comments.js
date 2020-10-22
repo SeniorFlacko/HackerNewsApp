@@ -10,9 +10,71 @@ import {
   ActivityIndicator,
   TouchableHighlight,
   Dimensions,
+  TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import HTML from 'react-native-render-html';
+
+const RenderComments = (props) => {
+  const [visible, setVisible] = useState(false);
+  const [allowChildrenDisplay, setallowChildrenDisplay] = useState([]);
+
+  const allowingDisplayedChildren = (commentId) => {
+    if (allowChildrenDisplay.includes(commentId)) {
+      const allowedIds = allowChildrenDisplay.filter(
+        (commmentid) => commmentid != commentId,
+      );
+      setallowChildrenDisplay(allowedIds);
+      return;
+    }
+
+    return setallowChildrenDisplay((listOfAllowedIds) => [
+      ...listOfAllowedIds,
+      commentId,
+    ]);
+  };
+
+  return (
+    <View>
+      {props.comments
+        .filter((comment) => comment.text)
+        .map((comment) => {
+          return (
+            <View key={comment.id} style={styles.commentSection}>
+              <View style={styles.authorContainer}>
+                <Text style={styles.authorText}>{comment.author}</Text>
+                {comment.children.length > 0 ? (
+                  <TouchableOpacity
+                    onPress={() => {
+                      allowingDisplayedChildren(comment.id);
+                    }}>
+                    {allowChildrenDisplay.includes(comment.id) ? (
+                      <Icon
+                        style={styles.chevron}
+                        name="chevron-up-outline"
+                        size={15}
+                      />
+                    ) : (
+                      <Icon
+                        style={styles.chevron}
+                        name="chevron-down-outline"
+                        size={15}
+                      />
+                    )}
+                  </TouchableOpacity>
+                ) : null}
+              </View>
+              <HTML html={comment.text} />
+              {comment.children.length > 0 &&
+              allowChildrenDisplay.includes(comment.id) ? (
+                <RenderComments comments={comment.children} />
+              ) : null}
+            </View>
+          );
+        })}
+    </View>
+  );
+};
 
 const Comments = (props) => {
   const [isLoading, setLoading] = useState(true);
@@ -36,23 +98,7 @@ const Comments = (props) => {
         <View style={{flex: 1, flexDirection: 'column'}}>
           <Text style={styles.commentsTitle}>Comments</Text>
           <ScrollView style={{flex: 1}}>
-            {comments
-              .filter((comment) => comment.text)
-              .map((comment) => {
-                return (
-                  <View key={comment.id} style={styles.commentSection}>
-                    <View style={styles.authorContainer}>
-                      <Text style={styles.authorText}>{comment.author}</Text>
-                      <Icon
-                        style={styles.chevron}
-                        name="chevron-down-outline"
-                        size={15}
-                      />
-                    </View>
-                    <HTML html={comment.text} />
-                  </View>
-                );
-              })}
+            <RenderComments comments={comments} />
           </ScrollView>
         </View>
       )}
